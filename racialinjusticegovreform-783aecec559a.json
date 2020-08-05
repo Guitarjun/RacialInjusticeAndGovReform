@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "racialinjusticegovreform",
+  "private_key_id": "783aecec559a53fc34b1fc691a32c6a3d0fe4a73",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDoVEWKg8sEpw8N\ngJSdPb3R4RyrWu7PJ86D6xiDvuYbNB+VSJB3irvrxWM0BBRBeIbE7rYC79PBQqND\nXC3nVgBpmpzGLFSPeSYsboiRzz0zr1gNvte/UNVj6hEOpEQSZQldpdN9cmVw8c6O\nTu9UbknKXFhuEEuY19gB1/P2I9wkFkT+ig0JQWckCI5YQqPWKIC366E1HoF1UhS9\ngJua/O7OxRSTlUqsKS3skdSG8seiMw5zx7/GE+KYjx+e0jM7DvOlEsm+2Q6nhdzW\nZQad7s9Q23D7/W9Ga0KE2cvro94Ykx6Big9kwsMH4aqWMxli9gGK0glpk/yOEsn7\nQrWOZOTdAgMBAAECggEAFlUpdSHrlUgoxIPAZWgOs9rXimo8i/m32oryCZIDZQiK\n46r8xhz2KPkJqvGcb9mx3MLUiK48lPZ+oqY8/GCSPBSCbvNKcpsy7fD3HEsHR01a\n4cFfVFLlHExe9OEZ8Qm4z4F19bhWI3f/AsN4Mo3CdpsPXg8fcTMIXs7/MsEqM2ao\numY7oHNCLfJ4mL7DhML0TfcwGKscBUMF4jrpc7tMuvIZ6tzwfIC7Mq2TxylgYYbN\nRG0+KDOE79DAfxP0m5wFRbrdUnBnX1SUeqMQX0FD99mJXNW4b+NlMZicyRtNHuB9\n2aHo8IqqETxoyLblQiv8bLXaUOBgb79DH/N0Rsj0aQKBgQD15Uad8rtuduLYM3FY\nOkTECyOsIRQojNm2/IXF14vJTIYDgvNeIDlMrFoi1heNrLO7zE7gR/ECiKTPNJOs\nvR6oxirD1lS74dUSrqAdSnI7Gmvq3V2+7Yi1wNToswqhE4YCISqiYfTaq2Rgm78G\nRgPYpNXCIRAyrZN+7Z/hxaq5WQKBgQDx4EhMkekhIb9q2xkw469vYzLjza4YPYKx\nMM9JGrqrcmzenb0Qr1z9sKCZXs4O9ZTT9ePdmGFZKm7gzbRAg2Dzr12+uJZK1q24\nHTOyR/iC5ZQzLO9Ds3Xf0SR08ehmNTDXaUWRYfNW8o+itANKAAiEHpIashdBiU2w\n+zl3w1qTJQKBgGll1CYBlBteNA+NxUiW+UC6sZinORfEf9FyXfiWUmF/PnYk3CH9\nV/Ioch46fDAK1aNqiGiUDZcTcOkr1RyWl5yqDEyTAxDhVM5EMXc8oMf6pEUwi206\nLX4SYHA5xhWS477n7nlZ2XUdP9I1D+Ulf6KNzN4ABAxk4DLosb45VttJAoGAM+Iy\nYApkgbDliJxa+Pu+JByZS/hQwe5f3HZl4H6VUDWJWO9pIO0c+2Yp7PxDIz5WoGj8\nagpHx4Ksqhg19Ci6YUtaxpB93KvUM8w/zJxXmGx6r8eRw2n5fPs14MgLW/FI+swg\nGiFyu1HosbP/iJ4dNYoBOSy+hFZZjf81wpTrFukCgYEAtRjUtT22q0AnwMKzPuj1\nXEpab7vKp1pa6VuPTGYyzp/cBkNEcXwgF7A0OvgyRzdW6cgW/owpsvSqIUTfBjrC\nw1MOY/OLEFWX5yqhBuxesJzzPPyN8VRfUBmWNIFsRHQZqYF6em6mY+8SVA+qA1K/\nJai9jhdRtmyNJeWh0h4GbBY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "arjun-982@racialinjusticegovreform.iam.gserviceaccount.com",
+  "client_id": "105017754818549258716",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/arjun-982%40racialinjusticegovreform.iam.gserviceaccount.com"
+}
