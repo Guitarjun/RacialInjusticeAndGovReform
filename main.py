@@ -10,7 +10,6 @@ def ask_local():
     if local.strip() == 'y':
         return pd.read_csv('Racial Injustice and Government Reform.csv')
     else:
-        print('Fetching data...')
         try:
             return load_data()
         except:
@@ -18,11 +17,12 @@ def ask_local():
             return pd.read_csv('Racial Injustice and Government Reform.csv')
 
 
-
 def load_data():
+    print('Authenticating...')
     scope = ['https://spreadsheets.google.com/feeds',
              'https://www.googleapis.com/auth/drive']
-    service_file = 'racialinjusticegovreform-783aecec559a.json'
+    service_file = 'C:/Users/arjun/Documents/CompSci/racialinjusticegovreform/racialinjusticegovreform-783aecec559a.json'
+    print('Fetching data...')
     spreadsheet = 'Racial Injustice and Government Reform (Responses)'
     credentials = service_account.Credentials.from_service_account_file(
                   service_file, scopes=scope)
@@ -69,8 +69,6 @@ def update_columns(data: pd.DataFrame):
                     'Do you consent to having your responses included in any analyses of the data?': 'consent'
                     }
     data.rename(columns=column_names, inplace=True)
-    # data['timestamp'] = pd.to_datetime(data['timestamp'])
-    # Fix timestamp ^
 
 
 def main():
