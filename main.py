@@ -1,8 +1,10 @@
 from __future__ import print_function
 import gspread
 from google.oauth2 import service_account
-from pathlib import Path
+import matplotlib.pyplot as plt
 import pandas as pd
+
+# Use django templates
 
 
 def ask_local():
@@ -74,12 +76,6 @@ def update_columns(data: pd.DataFrame):
 def main():
     data = ask_local()
     update_columns(data)
-    """
-    print("The following sheets are available")
-    for sheet in gc.openall():
-        print("{} - {}".format(sheet.title, sheet.id))
-    """
-    print(data.columns)
 
 
 if __name__ == '__main__':
