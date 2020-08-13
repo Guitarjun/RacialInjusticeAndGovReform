@@ -1,10 +1,11 @@
-from __future__ import print_function
 import gspread
 from google.oauth2 import service_account
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 
 # Use django templates
+# TODO: STORE FILES AND DOWNLOADS
 
 
 def ask_local():
@@ -14,9 +15,9 @@ def ask_local():
     else:
         try:
             return load_data()
-        except:
+        except Exception:
             print('Could not retrieve data \n Using local data instead')
-            return pd.read_csv('Racial Injustice and Government Reform.csv')
+            return pd.read_csv('data/Racial Injustice and Government Reform.csv')
 
 
 def load_data():
@@ -76,6 +77,17 @@ def update_columns(data: pd.DataFrame):
 def main():
     data = ask_local()
     update_columns(data)
+    print(data.to_string())
+
+    data['order_necessity'] = data['order_necessity'].astype('str')
+    print(data['religion'].dtypes)
+
+    # Plotting Bar Graphs
+    # sns.set(style='ticks')
+    # fig, axs = plt.subplots(1)
+    # fig.suptitle('Results')
+    # sns.catplot(data=data, x='order_necessity', kind='count')
+    # fig.savefig('Bar Graphs.png')
 
 
 if __name__ == '__main__':
