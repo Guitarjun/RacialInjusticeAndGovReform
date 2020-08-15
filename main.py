@@ -3,6 +3,7 @@ from google.oauth2 import service_account
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+import datetime
 
 
 # Use django templates
@@ -10,18 +11,26 @@ import seaborn as sns
 
 
 def ask_local():
+    """
+    According to user's response, fetches data from Google API or uses local copy of the dataset
+    :return: DataFrame of responses
+    """
     local = input('Would you like to use a local copy of the data? (if no internet connection) (y/n): ')
     if local.strip() == 'y':
         return pd.read_csv('data/Racial Injustice and Government Reform.csv')
     else:
         try:
             return load_data()
-        except Exception:
-            print('Could not retrieve data \n Using local data instead')
+        except Exception as e:
+            print(SystemExit(e))
+            print('Could not retrieve data \nUsing local data instead')
             return pd.read_csv('data/Racial Injustice and Government Reform.csv')
 
 
 def load_data():
+    """
+    :return: DataFrame of responses
+    """
     print('Authenticating...')
     scope = ['https://spreadsheets.google.com/feeds',
              'https://www.googleapis.com/auth/drive']
@@ -31,6 +40,7 @@ def load_data():
     credentials = service_account.Credentials.from_service_account_file(
         service_file, scopes=scope)
     gc = gspread.authorize(credentials)
+    # gc.login()  IN CASE OAUTH 2.0 CREDENTIALS EXPIRE
     workbook = gc.open(spreadsheet)
     sheet = workbook.sheet1
     data = pd.DataFrame(sheet.get_all_records())
@@ -38,6 +48,11 @@ def load_data():
 
 
 def update_columns(data: pd.DataFrame):
+    """
+    Updates the data set specifically
+    :param data: DataFrame of responses
+    :return: DataFrame with updated column names
+    """
     column_names = {'Timestamp': 'timestamp',
                     'What is your age?': 'age',
                     'What is your ethnicity/race? ': 'race',
@@ -73,21 +88,24 @@ def update_columns(data: pd.DataFrame):
                     'Do you consent to having your responses included in any analyses of the data?': 'consent'
                     }
     data.rename(columns=column_names, inplace=True)
+    data['race'].replace(to_replace='Indian/Pakistani (Asian subcontinent)', value='South Asian/Indian Subcontinent',
+                         inplace=True)
 
 
 def main():
     data = ask_local()
     update_columns(data)
+    data['timestamp'] = pd.to_datetime(data['timestamp'])
     print(data.to_string())
 
     # Plotting Bar Graphs
-    sns.set(style='ticks')
+    sns.set(style='whitegrid')
     fig, ax = plt.subplots(1)
+
     fig.suptitle('It is necessary for the government to preserve order and the rule of law during times of civil '
                  'unrest (even if it means violating individual rights and the Constitution)')
-    sns.countplot(data=data, x='order_necessity', ax=ax, palette="ch:.25", orient='v')
-    ax.set_xlabel('It is necessary for the government to preserve order and the rule of law during times of civil '
-                  'unrest (even if it means violating individual rights and the Constitution)')
+    sns.countplot(data=data, x='order_necessity', ax=ax, palette="ch:.24")
+    ax.set_xlabel('(Strongly Disagree) 1 - 5 (Strongly Agree)')
     ax.set_title('Responses: ' + str(len(data['order_necessity'])))
     fig.savefig('Bar Graphs.png')
 
