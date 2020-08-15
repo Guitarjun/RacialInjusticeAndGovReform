@@ -3,7 +3,6 @@ from google.oauth2 import service_account
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-import datetime
 
 
 # Use django templates
@@ -90,23 +89,28 @@ def update_columns(data: pd.DataFrame):
     data.rename(columns=column_names, inplace=True)
     data['race'].replace(to_replace='Indian/Pakistani (Asian subcontinent)', value='South Asian/Indian Subcontinent',
                          inplace=True)
+    # data.replace({1: 'Strongly Disagree', 2: 'Disagree', 3: 'Neutral', 4: 'Agree', 5: 'Strongly Agree'}, inplace=True)
 
 
 def main():
+    # Formatting data
     data = ask_local()
     update_columns(data)
     data['timestamp'] = pd.to_datetime(data['timestamp'])
-    print(data.to_string())
+    # print(data.to_string())
 
     # Plotting Bar Graphs
     sns.set(style='whitegrid')
-    fig, ax = plt.subplots(1)
+    fig, ax = plt.subplots(1, figsize=(15, 8))
 
-    fig.suptitle('It is necessary for the government to preserve order and the rule of law during times of civil '
-                 'unrest (even if it means violating individual rights and the Constitution)')
-    sns.countplot(data=data, x='order_necessity', ax=ax, palette="ch:.24")
+    fig.suptitle('Order and Freedom')
+    ax = sns.countplot(data=data, x='order_necessity', palette="ch:.24")
     ax.set_xlabel('(Strongly Disagree) 1 - 5 (Strongly Agree)')
-    ax.set_title('Responses: ' + str(len(data['order_necessity'])))
+    ax.set_ylabel('Responses: ' + str(len(data['order_necessity'])))
+    ax.set_title('It is necessary for the government to preserve order and the rule of law during times of civil '
+                 'unrest (even if it means violating individual rights and the Constitution): ')
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=20)
+    fig.tight_layout(pad=3.0)
     fig.savefig('Bar Graphs.png')
 
 
