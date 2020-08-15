@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
+
 # Use django templates
 # TODO: STORE FILES AND DOWNLOADS
 
@@ -11,7 +12,7 @@ import seaborn as sns
 def ask_local():
     local = input('Would you like to use a local copy of the data? (if no internet connection) (y/n): ')
     if local.strip() == 'y':
-        return pd.read_csv('Racial Injustice and Government Reform.csv')
+        return pd.read_csv('data/Racial Injustice and Government Reform.csv')
     else:
         try:
             return load_data()
@@ -28,7 +29,7 @@ def load_data():
     print('Fetching data...')
     spreadsheet = 'Racial Injustice and Government Reform (Responses)'
     credentials = service_account.Credentials.from_service_account_file(
-                  service_file, scopes=scope)
+        service_file, scopes=scope)
     gc = gspread.authorize(credentials)
     workbook = gc.open(spreadsheet)
     sheet = workbook.sheet1
@@ -79,15 +80,16 @@ def main():
     update_columns(data)
     print(data.to_string())
 
-    data['order_necessity'] = data['order_necessity'].astype('str')
-    print(data['religion'].dtypes)
-
     # Plotting Bar Graphs
-    # sns.set(style='ticks')
-    # fig, axs = plt.subplots(1)
-    # fig.suptitle('Results')
-    # sns.catplot(data=data, x='order_necessity', kind='count')
-    # fig.savefig('Bar Graphs.png')
+    sns.set(style='ticks')
+    fig, ax = plt.subplots(1)
+    fig.suptitle('It is necessary for the government to preserve order and the rule of law during times of civil '
+                 'unrest (even if it means violating individual rights and the Constitution)')
+    sns.countplot(data=data, x='order_necessity', ax=ax, palette="ch:.25", orient='v')
+    ax.set_xlabel('It is necessary for the government to preserve order and the rule of law during times of civil '
+                  'unrest (even if it means violating individual rights and the Constitution)')
+    ax.set_title('Responses: ' + str(len(data['order_necessity'])))
+    fig.savefig('Bar Graphs.png')
 
 
 if __name__ == '__main__':
