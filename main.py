@@ -89,7 +89,7 @@ def update_columns(data: pd.DataFrame):
     data.rename(columns=column_names, inplace=True)
     data['race'].replace(to_replace='Indian/Pakistani (Asian subcontinent)', value='South Asian/Indian Subcontinent',
                          inplace=True)
-    # data.replace({1: 'Strongly Disagree', 2: 'Disagree', 3: 'Neutral', 4: 'Agree', 5: 'Strongly Agree'}, inplace=True)
+    data.replace({1: 'Strongly Disagree', 2: 'Disagree', 3: 'Neutral', 4: 'Agree', 5: 'Strongly Agree'}, inplace=True)
 
 
 def main():
@@ -104,7 +104,7 @@ def main():
     fig, ax = plt.subplots(1, figsize=(15, 8))
 
     fig.suptitle('Order and Freedom')
-    ax = sns.countplot(data=data, x='order_necessity', palette="ch:.24")
+    ax = sns.countplot(data=data, x='order_necessity', palette="ch:.24", order=['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'])
     ax.set_xlabel('(Strongly Disagree) 1 - 5 (Strongly Agree)')
     ax.set_ylabel('Responses: ' + str(len(data['order_necessity'])))
     ax.set_title('It is necessary for the government to preserve order and the rule of law during times of civil '
