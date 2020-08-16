@@ -101,12 +101,11 @@ def main():
 
     # Plotting Bar Graphs
     sns.set(style='whitegrid')
-    fig, ax = plt.subplots(1, figsize=(15, 8))
+    fig, ax = plt.subplots(1, figsize=(14, 7))
 
     fig.suptitle('Order and Freedom')
     ax = sns.countplot(data=data, x='order_necessity', palette="ch:.24", order=['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'])
-    ax.set_xlabel('(Strongly Disagree) 1 - 5 (Strongly Agree)')
-    ax.set_ylabel('Responses: ' + str(len(data['order_necessity'])))
+    ax.set_xlabel('Responses: ' + str(len(data['order_necessity'])))
     ax.set_title('It is necessary for the government to preserve order and the rule of law during times of civil '
                  'unrest (even if it means violating individual rights and the Constitution): ')
     ax.set_xticklabels(ax.get_xticklabels(), rotation=20)
