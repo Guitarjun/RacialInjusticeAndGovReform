@@ -6,7 +6,7 @@ import seaborn as sns
 
 
 # Use django templates
-# TODO: STORE FILES AND DOWNLOADS
+# TODO: STORE FILES AND DOWNLOADS, later on change color palette before finishing
 
 
 def ask_local():
@@ -46,7 +46,7 @@ def load_data():
     return data
 
 
-def update_columns(data: pd.DataFrame):
+def update_data(data: pd.DataFrame):
     """
     Updates the data set specifically
     :param data: DataFrame of responses
@@ -89,28 +89,36 @@ def update_columns(data: pd.DataFrame):
     data.rename(columns=column_names, inplace=True)
     data['race'].replace(to_replace='Indian/Pakistani (Asian subcontinent)', value='South Asian/Indian Subcontinent',
                          inplace=True)
+    data['timestamp'] = pd.to_datetime(data['timestamp'])
     data.replace({1: 'Strongly Disagree', 2: 'Disagree', 3: 'Neutral', 4: 'Agree', 5: 'Strongly Agree'}, inplace=True)
 
 
 def main():
     # Formatting data
     data = ask_local()
-    update_columns(data)
-    data['timestamp'] = pd.to_datetime(data['timestamp'])
-    # print(data.to_string())
+    update_data(data)
+    print(data.to_string())
 
-    # Plotting Bar Graphs
+    # Bar Graph Functionality
     sns.set(style='whitegrid')
     fig, ax = plt.subplots(1, figsize=(14, 7))
 
     fig.suptitle('Order and Freedom')
-    ax = sns.countplot(data=data, x='order_necessity', palette="ch:.24", order=['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'])
+    ax = sns.countplot(data=data, x='order_necessity', palette="ch:.25",
+                       order=['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'])
     ax.set_xlabel('Responses: ' + str(len(data['order_necessity'])))
     ax.set_title('It is necessary for the government to preserve order and the rule of law during times of civil '
                  'unrest (even if it means violating individual rights and the Constitution): ')
     ax.set_xticklabels(ax.get_xticklabels(), rotation=20)
     fig.tight_layout(pad=3.0)
     fig.savefig('Bar Graphs.png')
+
+    # Pie/Donut Chart Functionality
+    fig2, ax2 = plt.subplots(1)
+    data['gender'] = data['gender'].astype('str')
+    print(data['gender'].dtypes)
+    ax2 = data.plot.pie(y='gender', figsize=(5, 5))
+    fig2.show()
 
 
 if __name__ == '__main__':
