@@ -17,13 +17,16 @@ def ask_local():
     local = input('Would you like to use a local copy of the data? (if no internet connection) (y/n): ')
     if local.strip() == 'y':
         return pd.read_csv('data/Racial Injustice and Government Reform.csv')
-    else:
+    elif local.strip() == 'n':
         try:
             return load_data()
         except Exception as e:
             print(SystemExit(e))
             print('Could not retrieve data \nUsing local data instead')
             return pd.read_csv('data/Racial Injustice and Government Reform.csv')
+    else:
+        print('Please type "y" or "n"')
+        ask_local()
 
 
 def load_data():
