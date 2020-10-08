@@ -118,7 +118,7 @@ def main():
 
     # Pie/Donut Chart Functionality
     fig2, ax2 = plt.subplots(1)
-    data['gender'] = data['gender'].astype('str')
+    data['gender'] = data['gender'].astype(str)
     print(data['gender'].dtypes)
     ax2 = data.plot.pie(y='gender', figsize=(5, 5))
     fig2.show()
